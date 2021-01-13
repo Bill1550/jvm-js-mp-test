@@ -7,7 +7,7 @@ fun main() {
         render(document.getElementById("root")) {
             child(Welcome::class) {
                 attrs {
-                    name = "Kotlin/JS"
+                    name = "jvm-js-mp-test JS Main"
                 }
             }
         }
