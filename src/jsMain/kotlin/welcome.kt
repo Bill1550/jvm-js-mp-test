@@ -73,7 +73,7 @@ class Welcome(props: WelcomeProps) : RComponent<WelcomeProps, WelcomeState>(prop
             }
         }
         div {
-            + "Http client: ${httpClient?.engine?.let {it::class?.simpleName}}"
+            + "Http client: ${httpClient.engine.let {it::class.simpleName}}"
         }
 
 
