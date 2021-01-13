@@ -23,8 +23,9 @@ repositories {
     maven(url = "https://kotlin.bintray.com/kotlinx/") // for KotlinX datetime
 }
 
+
 kotlin {
-    jvm {
+    jvm("server") {
         compilations.all {
             kotlinOptions.jvmTarget = "1.8"
         }
@@ -65,7 +66,7 @@ kotlin {
                 implementation(kotlin("test-annotations-common"))
             }
         }
-        val jvmMain by getting {
+        val serverMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-server-netty:$ktorVersion")
                 implementation("io.ktor:ktor-html-builder:$ktorVersion")
@@ -74,9 +75,10 @@ kotlin {
                 implementation("ch.qos.logback:logback-classic:1.2.3")
             }
         }
-        val jvmTest by getting {
+        val serverTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
+                implementation("org.testng:testng:7.1.0") // @Test was missing from above
                 implementation("io.ktor:ktor-server-tests:$ktorVersion")
             }
         }
@@ -106,13 +108,13 @@ tasks.getByName<KotlinWebpack>("jsBrowserProductionWebpack") {
     outputFileName = "output.js"
 }
 
-tasks.getByName<Jar>("jvmJar") {
+tasks.getByName<Jar>("serverJar") {
     dependsOn(tasks.getByName("jsBrowserProductionWebpack"))
     val jsBrowserProductionWebpack = tasks.getByName<KotlinWebpack>("jsBrowserProductionWebpack")
     from(File(jsBrowserProductionWebpack.destinationDirectory, jsBrowserProductionWebpack.outputFileName))
 }
 
 tasks.getByName<JavaExec>("run") {
-    dependsOn(tasks.getByName<Jar>("jvmJar"))
-    classpath(tasks.getByName<Jar>("jvmJar"))
+    dependsOn(tasks.getByName<Jar>("serverJar"))
+    classpath(tasks.getByName<Jar>("serverJar"))
 }
