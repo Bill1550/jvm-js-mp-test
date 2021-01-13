@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="jvm-js-mp-test-js-1.0-SNAPSHOT">
+    <output-path>D:\repos\multiplatform\jvm-js-mp-test\build\libs</output-path>
+    <root id="archive" name="jvm-js-mp-test-js-1.0-SNAPSHOT.jar">
+      <element id="module-output" name="jvm-js-mp-test.jsMain" />
+    </root>
+  </artifact>
+</component>
